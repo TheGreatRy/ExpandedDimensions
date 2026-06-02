@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Canvas x:Name="DrawingArea" Height="425" Width="800" VerticalAlignment="Bottom">
+           
+        </Canvas>
     </Grid>
 </Window>

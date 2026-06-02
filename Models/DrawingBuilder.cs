@@ -4,20 +4,20 @@ using System.Windows.Shapes;
 namespace ExpandedDimensions.Models
 {
     //Allows different types of shapes to be drawn
-    public class Builder
+    public class DrawingBuilder
     {
         //The drawing object to reference
         protected Drawing _drawing = new Drawing();
         //Default Constructor: internally sets the max amount of points
-        public Builder() { SetMaxPoints(); }
+        public DrawingBuilder() { SetMaxPoints(); }
         //Sets the max amount of points
         protected virtual void SetMaxPoints() { }
         //Add a point to the Drawing points array
         public void AddPoint(double x, double y) { _drawing.AddPoint(x, y); }
-        //The resulting Shape from the Builder
+        //The resulting Shape from the DrawingBuilder
         public virtual Shape Draw() { return null; }
     }
-    public class LineBuilder : Builder
+    public class LineDrawingBuilder : DrawingBuilder
     {
         //Force max to be 2
         protected override void SetMaxPoints()
@@ -41,7 +41,7 @@ namespace ExpandedDimensions.Models
         }
     }
 
-    public class EllipseBuilder : Builder
+    public class EllipseDrawingBuilder : DrawingBuilder
     {
         //Force max to be 2
         protected override void SetMaxPoints()
@@ -66,7 +66,7 @@ namespace ExpandedDimensions.Models
         }
     }
 
-    public class PolygonBuilder : Builder
+    public class PolygonDrawingBuilder : DrawingBuilder
     {
         //Allow *infinite* amount of points
         protected override void SetMaxPoints()
@@ -97,7 +97,7 @@ namespace ExpandedDimensions.Models
         }
     }
 
-    public class PolylineBuilder : Builder
+    public class PolylineDrawingBuilder : DrawingBuilder
     {
         //Allow *infinite* amount of points
         protected override void SetMaxPoints()
@@ -125,7 +125,7 @@ namespace ExpandedDimensions.Models
         }
     }
 
-    public class RectangleBuilder : Builder
+    public class RectangleDrawingBuilder : DrawingBuilder
     {
         //Force max to be 2
         protected override void SetMaxPoints()
