@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExpandedDimensions"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Canvas x:Name="DrawingArea" Height="425" Width="800" VerticalAlignment="Bottom">
-           
-        </Canvas>
-    </Grid>
+        Title="MainWindow" Height="450" Width="800"
+        MouseLeftButtonUp="Window_MouseLeftButtonUp"
+        Keyboard.KeyUp="Window_KeyUp"
+        >
+
+    <Canvas x:Name="DrawingArea" Height="425" Width="800" VerticalAlignment="Bottom" Background="White"/>
 </Window>

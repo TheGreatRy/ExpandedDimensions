@@ -1,106 +1,82 @@
 ﻿using ExpandedDimensions.Models;
+using System.Windows;
+using System.Windows.Shapes;
 
 namespace ExpandedDimensions.Controllers
 {
     public interface DrawingFlyweight
     {
-        DrawingBuilder drawingBuilder { set; get; }
-        void Draw();
+        public DrawingBuilder _drawingBuilder { get; }
+        public void PointListener(Point point)
+        {
+            _drawingBuilder.AddPoint(point.X, point.Y);
+        }
+        public Shape Draw()
+        {
+            return _drawingBuilder.GetDrawing();
+        }
+    }
+
+    public class DrawingFlyweightFactory
+    {
+        public static Dictionary<string, DrawingFlyweight> drawingCache = new Dictionary<string, DrawingFlyweight>();
+
+        public DrawingFlyweight GetDrawing(string key)
+        {
+            if (drawingCache.ContainsKey(key))
+            {
+                return drawingCache[key];
+            }
+            else
+            {
+                DrawingFlyweight flyweight = null;
+                switch (key)
+                {
+                    case ("line"):
+                        flyweight = new LineFlyweight();
+                        break;
+                    case ("ellipse"):
+                        flyweight = new EllipseFlyweight();
+                        break;
+                    case ("polyline"):
+                        flyweight = new PolylineFlyweight();
+                        break;
+                    case ("polygon"):
+                        flyweight = new PolygonFlyweight();
+                        break;
+                    case ("rectangle"):
+                        flyweight = new RectangleFlyweight();
+                        break;
+                    default:
+                        throw new ArgumentException("Invalid Drawing Type");
+                }
+                drawingCache.Add(key, flyweight);
+                return flyweight;
+            }
+        }
     }
 
     public class LineFlyweight : DrawingFlyweight
     {
-        public DrawingBuilder drawingBuilder
-        {
-            set
-            {
-                drawingBuilder = new LineDrawingBuilder();
-            }
-            get
-            {
-                return drawingBuilder;
-            }
-        }
-
-        public void Draw()
-        {
-            
-        }
+        public DrawingBuilder _drawingBuilder { get; } = new LineDrawingBuilder();
     }
     public class EllipseFlyweight : DrawingFlyweight
     {
-        public DrawingBuilder drawingBuilder
-        {
-            set
-            {
-                drawingBuilder = new EllipseDrawingBuilder();
-            }
-            get
-            {
-                return drawingBuilder;
-            }
-        }
+        public DrawingBuilder _drawingBuilder { get; } = new EllipseDrawingBuilder();
 
-        public void Draw()
-        {
-            
-        }
     }
     public class PolylineFlyweight : DrawingFlyweight
     {
-        public DrawingBuilder drawingBuilder
-        {
-            set
-            {
-                drawingBuilder = new PolylineDrawingBuilder();
-            }
-            get
-            {
-                return drawingBuilder;
-            }
-        }
-
-        public void Draw()
-        {
-           
-        }
+        public DrawingBuilder _drawingBuilder { get; } = new PolylineDrawingBuilder();
     }
     public class PolygonFlyweight : DrawingFlyweight
     {
-        public DrawingBuilder drawingBuilder
-        {
-            set
-            {
-                drawingBuilder = new PolygonDrawingBuilder();
-            }
-            get
-            {
-                return drawingBuilder;
-            }
-        }
+        public DrawingBuilder _drawingBuilder { get; } = new PolygonDrawingBuilder();
 
-        public void Draw()
-        {
-            
-        }
     }
     public class RectangleFlyweight : DrawingFlyweight
     {
-        public DrawingBuilder drawingBuilder
-        {
-            set
-            {
-                drawingBuilder = new RectangleDrawingBuilder();
-            }
-            get
-            {
-                return drawingBuilder;
-            }
-        }
-
-        public void Draw()
-        {
-            
-        }
+        public DrawingBuilder _drawingBuilder { get; } = new RectangleDrawingBuilder();
     }
+
 }

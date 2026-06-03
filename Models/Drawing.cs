@@ -11,7 +11,7 @@ namespace ExpandedDimensions.Models
         //Check to see if the amount of points exceeds the limit
         public bool GetMaxCheck()
         {
-            return _maxPoints >= _points.Count;
+            return _points.Count >= _maxPoints;
         }
         //Get the current count of the point array for comparisons
         public int GetPointsLength()
