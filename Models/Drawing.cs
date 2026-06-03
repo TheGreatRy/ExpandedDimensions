@@ -7,7 +7,7 @@ namespace ExpandedDimensions.Models
         //Variables
         private int _maxPoints = 2;
         private List<Point> _points = new List<Point>();
-        
+
         //Check to see if the amount of points exceeds the limit
         public bool GetMaxCheck()
         {
@@ -15,8 +15,8 @@ namespace ExpandedDimensions.Models
         }
         //Get the current count of the point array for comparisons
         public int GetPointsLength()
-        { 
-            return _points.Count; 
+        {
+            return _points.Count;
         }
         //Get the array of points being stored
         public List<Point> GetPointsList()
@@ -29,10 +29,8 @@ namespace ExpandedDimensions.Models
             _maxPoints = maxPoints;
         }
         //Add a point to the array for the Drawing
-        public void AddPoint(double x, double y)
-        {
-            if (GetMaxCheck()) _points.Clear();
-            else _points.Add(new Point(x, y));
-        }
+        public void AddPoint(double x, double y) { _points.Add(new Point(x, y)); }
+
+        public void Clear() { _points.Clear(); }
     }
 }

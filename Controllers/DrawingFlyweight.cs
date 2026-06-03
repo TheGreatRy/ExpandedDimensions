@@ -13,7 +13,12 @@ namespace ExpandedDimensions.Controllers
         }
         public Shape Draw()
         {
-            return _drawingBuilder.GetDrawing();
+            return _drawingBuilder.BuildShape();
+        }
+
+        public void ClearCheck()
+        {
+            if (_drawingBuilder.GetDrawing().GetMaxCheck()) _drawingBuilder.GetDrawing().Clear();
         }
     }
 

@@ -6,7 +6,7 @@ namespace ExpandedDimensions.Views
     public class DrawingCommand
     {
         protected string _key = "";
-        public DrawingFlyweight _drawingFlyweight
+        public DrawingFlyweight DrawingFlyweight
         {  
             get
             {
@@ -15,7 +15,7 @@ namespace ExpandedDimensions.Views
         }
         public DrawingCommand() { }
         public DrawingFlyweightFactory flyweightFactory = new DrawingFlyweightFactory();
-        virtual public Shape DrawShape() { return _drawingFlyweight.Draw(); }
+        virtual public Shape DrawShape() { return DrawingFlyweight.Draw(); }
     }
 
     public class SwitchToLineCommand : DrawingCommand 

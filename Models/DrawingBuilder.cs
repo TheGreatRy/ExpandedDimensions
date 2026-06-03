@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -16,7 +17,8 @@ namespace ExpandedDimensions.Models
         //Add a point to the Drawing points array
         public void AddPoint(double x, double y) { _drawing.AddPoint(x, y); }
         //The resulting Shape from the DrawingBuilder
-        public virtual Shape GetDrawing() { return null; }
+        public virtual Shape BuildShape() { return null; }
+        public Drawing GetDrawing() { return _drawing; }
     }
     public class LineDrawingBuilder : DrawingBuilder
     {
@@ -26,7 +28,7 @@ namespace ExpandedDimensions.Models
             _drawing.SetMaxPoints(2);
         }
         //Creates a Line object from the points array
-        public override Shape GetDrawing()
+        public override Shape BuildShape()
         {
             if (_drawing.GetPointsLength() > 1)
             {
@@ -36,7 +38,7 @@ namespace ExpandedDimensions.Models
                 drawing.X2 = _drawing.GetPointsList()[1].X;
                 drawing.Y2 = _drawing.GetPointsList()[1].Y;
 
-                drawing.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
+                drawing.Stroke = Brushes.LightSteelBlue;
 
                 drawing.HorizontalAlignment = HorizontalAlignment.Left;
                 drawing.VerticalAlignment = VerticalAlignment.Center;
@@ -56,7 +58,7 @@ namespace ExpandedDimensions.Models
             _drawing.SetMaxPoints(2);
         }
         //Creates an Ellipse object from the points array
-        public override Shape GetDrawing()
+        public override Shape BuildShape()
         {
             if (_drawing.GetPointsLength() > 1)
             {
@@ -66,6 +68,16 @@ namespace ExpandedDimensions.Models
 
                 drawing.Width = width;
                 drawing.Height = height;
+
+                Canvas.SetLeft(drawing,Math.Min(_drawing.GetPointsList()[0].X, _drawing.GetPointsList()[1].X));
+                Canvas.SetTop(drawing, Math.Min(_drawing.GetPointsList()[0].Y, _drawing.GetPointsList()[1].Y));
+                
+                drawing.Stroke = Brushes.DarkCyan;
+
+                drawing.HorizontalAlignment = HorizontalAlignment.Left;
+                drawing.VerticalAlignment = VerticalAlignment.Center;
+                drawing.StrokeThickness = 2;
+
 
                 return drawing;
             }
@@ -81,7 +93,7 @@ namespace ExpandedDimensions.Models
             _drawing.SetMaxPoints(int.MaxValue);
         }
         //Creates a Polygon object from the points array
-        public override Shape GetDrawing()
+        public override Shape BuildShape()
         {
             if (_drawing.GetPointsLength() > 1)
             {
@@ -98,6 +110,13 @@ namespace ExpandedDimensions.Models
 
                 drawing.Points = points;
 
+                drawing.Stroke = Brushes.HotPink;
+
+                drawing.HorizontalAlignment = HorizontalAlignment.Left;
+                drawing.VerticalAlignment = VerticalAlignment.Center;
+                drawing.StrokeThickness = 2;
+
+
                 return drawing;
             }
             return null;
@@ -112,7 +131,7 @@ namespace ExpandedDimensions.Models
             _drawing.SetMaxPoints(int.MaxValue);
         }
         //Creates a Polygon object from the points array
-        public override Shape GetDrawing()
+        public override Shape BuildShape()
         {
             if (_drawing.GetPointsLength() > 1)
             {
@@ -126,9 +145,16 @@ namespace ExpandedDimensions.Models
 
                 drawing.Points = points;
 
+                drawing.Stroke = Brushes.Orange;
+
+                drawing.HorizontalAlignment = HorizontalAlignment.Left;
+                drawing.VerticalAlignment = VerticalAlignment.Center;
+                drawing.StrokeThickness = 2;
+
+
                 return drawing;
             }
-            return null;
+                return null;
         }
     }
 
@@ -140,7 +166,7 @@ namespace ExpandedDimensions.Models
             _drawing.SetMaxPoints(2);
         }
         //Creates a Rectangle object from the points array
-        public override Shape GetDrawing()
+        public override Shape BuildShape()
         {
             if (_drawing.GetPointsLength() > 1)
             {
@@ -150,6 +176,16 @@ namespace ExpandedDimensions.Models
 
                 drawing.Width = width;
                 drawing.Height = height;
+
+                Canvas.SetLeft(drawing, Math.Min(_drawing.GetPointsList()[0].X, _drawing.GetPointsList()[1].X));
+                Canvas.SetTop(drawing, Math.Min(_drawing.GetPointsList()[0].Y, _drawing.GetPointsList()[1].Y));
+                
+                drawing.Stroke = Brushes.Violet;
+
+                drawing.HorizontalAlignment = HorizontalAlignment.Left;
+                drawing.VerticalAlignment = VerticalAlignment.Center;
+                drawing.StrokeThickness = 2;
+
 
                 return drawing;
             }

@@ -26,7 +26,7 @@ namespace ExpandedDimensions
             }
         }
 
-        public static Point GetMousePositionWindowsForms()
+        public static Point GetMousePos()
         {
             var point = Mouse.GetPosition(Application.Current.MainWindow);
             return new Point((int)point.X, (int)point.Y);
@@ -34,8 +34,9 @@ namespace ExpandedDimensions
 
         private void Window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Command._drawingFlyweight.PointListener(GetMousePositionWindowsForms());
+            Command.DrawingFlyweight.PointListener(GetMousePos());
             Draw(Command.DrawShape());
+            Command.DrawingFlyweight.ClearCheck();
         }
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
@@ -57,6 +58,10 @@ namespace ExpandedDimensions
                 case Key.T:
                     Command = new SwitchToRectangleCommand();
                     break;
+                case Key.Escape:
+                    App.Current.MainWindow.Close();
+                    break;
+                    
             }
            
         }
