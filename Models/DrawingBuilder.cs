@@ -17,7 +17,7 @@ namespace ExpandedDimensions.Models
         //Add a point to the Drawing points array
         public void AddPoint(double x, double y) { _drawing.AddPoint(x, y); }
         //The resulting Shape from the DrawingBuilder
-        public virtual Shape BuildShape() { return null; }
+        public virtual Shape BuildShape(bool stopKey) { return null; }
         public Drawing GetDrawing() { return _drawing; }
     }
     public class LineDrawingBuilder : DrawingBuilder
@@ -28,10 +28,11 @@ namespace ExpandedDimensions.Models
             _drawing.SetMaxPoints(2);
         }
         //Creates a Line object from the points array
-        public override Shape BuildShape()
+        public override Shape BuildShape(bool stopKey)
         {
             if (_drawing.GetPointsLength() > 1)
             {
+                
                 Line drawing = new Line();
                 drawing.X1 = _drawing.GetPointsList()[0].X;
                 drawing.Y1 = _drawing.GetPointsList()[0].Y;
@@ -58,7 +59,7 @@ namespace ExpandedDimensions.Models
             _drawing.SetMaxPoints(2);
         }
         //Creates an Ellipse object from the points array
-        public override Shape BuildShape()
+        public override Shape BuildShape(bool stopKey)
         {
             if (_drawing.GetPointsLength() > 1)
             {
@@ -93,9 +94,9 @@ namespace ExpandedDimensions.Models
             _drawing.SetMaxPoints(int.MaxValue);
         }
         //Creates a Polygon object from the points array
-        public override Shape BuildShape()
+        public override Shape BuildShape(bool stopKey)
         {
-            if (_drawing.GetPointsLength() > 1)
+            if (_drawing.GetPointsLength() > 1 && stopKey)
             {
                 Polygon drawing = new Polygon();
                 PointCollection points = new PointCollection();
@@ -116,7 +117,6 @@ namespace ExpandedDimensions.Models
                 drawing.VerticalAlignment = VerticalAlignment.Center;
                 drawing.StrokeThickness = 2;
 
-
                 return drawing;
             }
             return null;
@@ -131,9 +131,9 @@ namespace ExpandedDimensions.Models
             _drawing.SetMaxPoints(int.MaxValue);
         }
         //Creates a Polygon object from the points array
-        public override Shape BuildShape()
+        public override Shape BuildShape(bool stopKey)
         {
-            if (_drawing.GetPointsLength() > 1)
+            if (_drawing.GetPointsLength() > 1 && stopKey)
             {
                 Polygon drawing = new Polygon();
                 PointCollection points = new PointCollection();
@@ -166,7 +166,7 @@ namespace ExpandedDimensions.Models
             _drawing.SetMaxPoints(2);
         }
         //Creates a Rectangle object from the points array
-        public override Shape BuildShape()
+        public override Shape BuildShape(bool stopKey)
         {
             if (_drawing.GetPointsLength() > 1)
             {

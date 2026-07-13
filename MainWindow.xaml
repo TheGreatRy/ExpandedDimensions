@@ -8,6 +8,7 @@
         Title="MainWindow" Height="450" Width="800"
         MouseLeftButtonUp="Window_MouseLeftButtonUp"
         Keyboard.KeyUp="Window_KeyUp"
+        Keyboard.KeyDown="Window_KeyDown"
         >
 
     <Canvas x:Name="DrawingArea" Height="425" Width="800" VerticalAlignment="Bottom" Background="White"/>

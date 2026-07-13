@@ -10,19 +10,34 @@ namespace ExpandedDimensions
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool _stopKey = true;
         public DrawingCommand Command { get; set; }
         
         public MainWindow()
         {
             InitializeComponent(); 
             Command = new DrawingCommand();
+
+            //// Create a viewport
+            //var viewport = new Viewport3DX();
+
+            //// Create a camera
+            //var camera = new PerspectiveCamera
+            //{
+            //    Position = new System.Windows.Media.Media3D.Point3D(5, 5, 5),
+            //    LookDirection = new System.Windows.Media.Media3D.Vector3D(-5, -5, -5)
+            //};
+            //viewport.Camera = camera;
+
+            //// Add to your UI
+            //Content = viewport;
         }
 
         public void Draw(Shape shape) 
         {
-            if (Command.DrawShape() != null)
+            if (Command.DrawShape(_stopKey) != null)
             {
-                DrawingArea.Children.Add(Command.DrawShape());
+                DrawingArea.Children.Add(Command.DrawShape(_stopKey));
             }
         }
 
@@ -35,7 +50,7 @@ namespace ExpandedDimensions
         private void Window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Command.DrawingFlyweight.PointListener(GetMousePos());
-            Draw(Command.DrawShape());
+            Draw(Command.DrawShape(_stopKey));
             Command.DrawingFlyweight.ClearCheck();
         }
 
@@ -61,9 +76,16 @@ namespace ExpandedDimensions
                 case Key.Escape:
                     App.Current.MainWindow.Close();
                     break;
-                    
+                //case Key.Space:
+                //    _stopKey = false;
+                //    break;
             }
            
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if (e.Key == Key.Space) _stopKey = true;
         }
     }
 }

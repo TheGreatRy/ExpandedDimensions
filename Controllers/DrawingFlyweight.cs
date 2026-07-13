@@ -11,9 +11,9 @@ namespace ExpandedDimensions.Controllers
         {
             _drawingBuilder.AddPoint(point.X, point.Y);
         }
-        public Shape Draw()
+        public Shape Draw(bool stopKey)
         {
-            return _drawingBuilder.BuildShape();
+            return _drawingBuilder.BuildShape(stopKey);
         }
 
         public void ClearCheck()

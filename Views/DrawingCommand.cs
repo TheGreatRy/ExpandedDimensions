@@ -15,7 +15,7 @@ namespace ExpandedDimensions.Views
         }
         public DrawingCommand() { }
         public DrawingFlyweightFactory flyweightFactory = new DrawingFlyweightFactory();
-        virtual public Shape DrawShape() { return DrawingFlyweight.Draw(); }
+        virtual public Shape DrawShape(bool stopKey) { return DrawingFlyweight.Draw(stopKey); }
     }
 
     public class SwitchToLineCommand : DrawingCommand 
